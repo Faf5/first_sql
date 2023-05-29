@@ -64,7 +64,7 @@ SHOW CREATE TABLE employee;
 SELECT * FROM employee;
 
 --ME TRYING TO DROP THE CONSTRAINT IN ORDER TO DROP THE EMPLOYEE TABLE AND 
-REDO IT AFTER I REALISED THAT THE ORDER OF THE COLUMNS WERE WRONG AND I DIDNT KNOW HOW TO FIX IT
+--REDO IT AFTER I REALISED THAT THE ORDER OF THE COLUMNS WERE WRONG AND I DIDNT KNOW HOW TO FIX IT
 
 ALTER TABLE employee
 DROP CONTRAINT (branch_id)
@@ -73,7 +73,7 @@ REFERENCES branch(branch_id);
 DROP TABLE employee;
 
 --I READ ON STACK OVERFLOW THAT I FIRST NEED TO DROP THE TABLE WITH THE CONSTRAINT WHICH IS BRANCH IN MY CASE AND CREATE BOTH 
-employee and branch FROM SCARTCH, OH BOY
+--employee and branch FROM SCARTCH, OH BOY
 
 -- LOL CANT DROP branch because then I have to drop other tables as well. there should be another way, back to Google
 
@@ -82,8 +82,8 @@ FROM sys.foreign_keys
 WHERE employee(branch_id) = branch(branch_id);
 
 --EUREKA I FOUND THE SOLUTION ON STACK OVERFLOW There is a configuration to turn off the check and turn it on.
-For example, if you are using MySQL, then to turn it off, you must write SET foreign_key_checks = 0;
-Then delete or clear the table, and re-enable the check SET foreign_key_checks = 1;
+--For example, if you are using MySQL, then to turn it off, you must write SET foreign_key_checks = 0;
+--Then delete or clear the table, and re-enable the check SET foreign_key_checks = 1;
 
 
 SET foreign_key_checks = 0;
@@ -117,6 +117,7 @@ INSERT INTO employee VALUES(101, 'Jan', 'Levinston', '1961/05/11', 'F', '110000'
 --SCRANTON BRANCH
 
 INSERT INTO employee VALUES(102, 'Micheal', 'Scott', '1964/03/15', 'M', '75000', 100, NULL);
+INSERT INTO branch VALUES(2, 'Scranton', 100, '1992/04/06');
 
 UPDATE employee
 SET branch_id = 2
@@ -136,6 +137,9 @@ WHERE emp_id =106;
 
 INSERT INTO employee VALUES(107, 'Andy', 'Bernard', '1973/07/22', 'M', '65000',106, 3);
 INSERT INTO employee VALUES(108, 'Jen', 'Helpoot', '1978/10/01', 'M', '71000', 106, 3);
+INSERT INTO branch VALUES(3, 'Stamford', 106, '1998/02/13');
+
+
 
 SELECT * FROM employee;
 SELECT * FROM branch;
