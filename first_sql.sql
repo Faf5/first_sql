@@ -119,6 +119,10 @@ INSERT INTO employee VALUES(101, 'Jan', 'Levinston', '1961/05/11', 'F', '110000'
 INSERT INTO employee VALUES(102, 'Micheal', 'Scott', '1964/03/15', 'M', '75000', 100, NULL);
 INSERT INTO branch VALUES(2, 'Scranton', 100, '1992/04/06');
 
+UPDATE branch
+SET mgr_id = 102
+WHERE branch_id = 2;
+
 UPDATE employee
 SET branch_id = 2
 WHERE emp_id = 102;
@@ -215,3 +219,50 @@ SELECT AVG(salary) FROM employee;
 --FIND THE AVERAGE OF ALL EMPLOYEES SALARIES where sex is male
 SELECT AVG(salary) FROM employee
 WHERE sex = 'M';
+
+--FIND THE SUM OF ALL EMPLOYEES SALARIES
+SELECT SUM(salary) FROM employee;
+
+--FIND OUT HOW MANY MALES AND FEMALES THERE IS IN THE COMPANY
+SELECT COUNT(sex), sex FROM employee
+GROUP BY sex;
+
+--FIND THE TOTAL SALES OF EACH SALESMAN
+SELECT SUM(total_sales), emp_id FROM works_with
+GROUP BY emp_id;
+
+--WILDCARDS
+--FIND ANY CLIENTS WHO ARE AN LLC
+SELECT * FROM client
+WHERE client_name LIKE'%LLC';
+
+--FIND ANY BRANCH SUPPLIERS WHO ARE IN THE LABLES BUSINESS
+SELECT * FROM branch_supplier
+WHERE supplier_name LIKE '%labels%';
+
+--FIND ANY EMPLOYEE BORN IN OCTOBER
+SELECT * FROM employee
+WHERE birth_date LIKE '____-10-__';
+
+--FIND ANY CLIENTS THAT ARE SCHOOLS
+SELECT * FROM client
+WHERE client_name LIKE '%school%';
+
+--UNION QUERIES
+--FIND A LIST OF EMPLOYEE AND BRANCH NAMES
+SELECT first_name
+FROM employee
+UNION
+SELECT branch_name
+FROM branch;
+
+--JOINS
+INSERT INTO branch VALUES(4, 'Buffalo', NULL, NULL);
+
+--FIND ALL BRANCHES AND NAMES OF THEIR MANAGERS
+SELECT employee.emp_id, employee.first_name, branch.branch_name
+FROM employee
+JOIN branch
+ON employee.emp_id = branch.mgr_id;
+
+
