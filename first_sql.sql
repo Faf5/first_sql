@@ -296,7 +296,13 @@ WHERE client.branch_id = (SELECT branch.branch_id
 				FROM branch
                 WHERE branch.mgr_id = 102
                 LIMIT 1);
+--DELETE MICHAEL SCOTT WHO HAS A FOREIGN KEY ASSOCIATED TO THE PRIMARY KEY FROM DATABASE
 
+DELETE FROM employee 
+WHERE emp_id = 102;
+
+SELECT * FROM employee;
+SELECT * FROM branch;
 
 
 
